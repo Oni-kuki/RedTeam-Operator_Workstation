@@ -53,6 +53,28 @@ packer build --only=virtualbox-iso .\windows_10.json
 packer build --only=vmware-iso .\windows_10.json 
 ```
 
+## launching  :rocket:  
+### Vagrant  
+Most Interesting part for the easiest way to use.  
+Even if it seems to be easy, there are prerequisites for some providers.  
+For VMware you may need additional plugins for vagrant  
+https://developer.hashicorp.com/vagrant/install/vmware   
+```
+vagrant plugin install vagrant-vmware-desktop
+```
+
+### After that  
+Clone this repo or take just the `Vagrantfile`  
+VirtualBox Provider
+```
+vagrant up RTOW-Vbox
+```
+
+VMware Provider
+```
+vagrant up RTOW-Vmware
+```
+
 > [!CAUTION]
 > I put 8gb of ram by default so, if you want more or less change the `attribut` memory at last of `windows_10.json`file.
 > it may take some time, you can grab coffe or tea while you wait  :coffee:
