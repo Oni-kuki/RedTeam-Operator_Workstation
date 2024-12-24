@@ -52,6 +52,9 @@ packer plugins install github.com/hashicorp/vmware
 packer build --only=virtualbox-iso .\windows_10.json 
 packer build --only=vmware-iso .\windows_10.json 
 ```
+> [!CAUTION]
+> I put 8gb of ram by default so, if you want more or less change the `attribut` memory at last of `windows_10.json`file.
+> it may take some time, you can grab coffe or tea while you wait  :coffee:
 
 ## launching  :rocket:  
 ### Vagrant  
@@ -74,10 +77,9 @@ VMware Provider
 ```
 vagrant up RTOW-Vmware --provider=vmware_workstation
 ```
-
 > [!CAUTION]
-> I put 8gb of ram by default so, if you want more or less change the `attribut` memory at last of `windows_10.json`file.
-> it may take some time, you can grab coffe or tea while you wait  :coffee:
+> I put 2gb of ram by default so, if you want more or less change the reference attributs in the `Vagrantfile` it's same thing for the cpus.  
+> it may take some time the first time because it's necessary to download the box once, you can grab coffe or tea while you wait  :coffee:
 
 ## Future Improvements  
 - A future release will include full WSL configuration across both VMware and VirtualBox environments.
