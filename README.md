@@ -65,6 +65,12 @@ https://developer.hashicorp.com/vagrant/install/vmware
 ```
 vagrant plugin install vagrant-vmware-desktop
 ```
+> [!CAUTION]
+> I put 2gb of ram by default so, if you want more or less change the reference attributs in the `Vagrantfile` it's same thing for the cpus.  
+> it may take some time the first time because it's necessary to download the box once, you can grab coffe or tea while you wait  :coffee:
+
+> [!CAUTION]
+> The Port `3389` can be opened for RDP if you work with VPS, remote acces machine or something like that.
 
 ### After that  
 Clone this repo or take just the `Vagrantfile`  
@@ -77,9 +83,6 @@ VMware Provider
 ```
 vagrant up RTOW-Vmware --provider=vmware_workstation
 ```
-> [!CAUTION]
-> I put 2gb of ram by default so, if you want more or less change the reference attributs in the `Vagrantfile` it's same thing for the cpus.  
-> it may take some time the first time because it's necessary to download the box once, you can grab coffe or tea while you wait  :coffee:
 
 ## Future Improvements  
 - A future release will include full WSL configuration across both VMware and VirtualBox environments.
