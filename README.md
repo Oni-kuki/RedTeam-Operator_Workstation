@@ -1,8 +1,14 @@
 # RedTeam-Operator_Workstation  
+<p align="center">
+  <img src="./image/RedTeam.jpg" alt="Red" />
+</p>  
 
 Based on this Project Overview : https://github.com/StefanScherer/packer-windows  
  
 ## Overview  
+> [!NOTE]  
+> It's a simple project, nothing complicated, but if it helps, that's fine for me.  This is the most important
+
 This project automates the setup of work environments for Red Team operators, enabling faster deployment and operational readiness.  
 
 At the root of the `C:` drive, you will find a comprehensive set of tools necessary for conducting Red Team missions while adhering to OPSEC best practices.  
@@ -41,7 +47,7 @@ Vmware
 ```packer
 packer plugins install github.com/hashicorp/vmware
 ```
-### Building
+## Building  
 ```
 packer build --only=virtualbox-iso .\windows_10.json 
 packer build --only=vmware-iso .\windows_10.json 
@@ -49,6 +55,7 @@ packer build --only=vmware-iso .\windows_10.json
 
 > [!CAUTION]
 > I put 8gb of ram by default so, if you want more or less change the `attribut` memory at last of `windows_10.json`file.
+> it may take some time, you can grab coffe or tea while you wait  :coffee:
 
 ## Future Improvements  
 - A future release will include full WSL configuration across both VMware and VirtualBox environments.
