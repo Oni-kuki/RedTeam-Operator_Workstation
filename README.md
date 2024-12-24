@@ -29,6 +29,27 @@ At the root of the `C:` drive, you will find a comprehensive set of tools necess
 - Only the base Ubuntu machine is operational in this environment.  
 - Ubuntu is pre-installed, but some tools might not be available immediately. The provided script can assist in configuring and downloading necessary tools.  
 
+## Packer  
+- If you want to create your own vagrant boxes using the Packers tool, you'll need to install packer and the plugins associated with the provider you want to use.  
+- For packer you can use chocolatey packages, winget or directly on site, and yes vagrant are necessary to.  
+
+Virtualbox  
+```packer
+packer plugins install github.com/hashicorp/virtualbox
+```
+Vmware  
+```packer
+packer plugins install github.com/hashicorp/vmware
+```
+### Building
+```
+packer build --only=virtualbox-iso .\windows_10.json 
+packer build --only=vmware-iso .\windows_10.json 
+```
+
+> [!CAUTION]
+> I put 8gb of ram by default so, if you want more or less change the `attribut` memory at last of `windows_10.json`file.
+
 ## Future Improvements  
 - A future release will include full WSL configuration across both VMware and VirtualBox environments.
 - For the moment I've only built and pushed w10 machines on the registry, but I'll be pushing w11 very soon.  
