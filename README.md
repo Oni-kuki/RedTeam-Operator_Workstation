@@ -70,7 +70,8 @@ vagrant plugin install vagrant-vmware-desktop
 > it may take some time the first time because it's necessary to download the box once, you can grab coffe or tea while you wait  :coffee:
 
 > [!CAUTION]
-> The Port `3389` can be opened for RDP if you work with VPS, remote acces machine or something like that.
+> The Port `3389` can be opened for RDP if you work with VPS, remote acces machine or something like that.  
+> (With "Security" of course, :expressionless: I don't think I should have to specify this, but I'm doing it anyway)  
 
 ### After that  
 Clone this repo or take just the `Vagrantfile`  
