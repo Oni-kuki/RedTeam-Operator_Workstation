@@ -1,0 +1,29 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+
+install:
+  - choco feature disable --name showDownloadProgress
+  - choco install -y packer
+  - ps: Install-WindowsFeature Hyper-V-PowerShell
+  - ps: Install-PackageProvider -Name NuGet -Force
+  - ps: Install-Module PsScriptAnalyzer -Force
+
+build_script:
+  - ps: .\make_unattend_iso.ps1
+
+test_script:
+  - ps: .\test.ps1
+  - ps: |
+      Add-AppveyorTest -Name "PsScriptAnalyzer" -Outcome Running
+      $Results = Invoke-ScriptAnalyzer -Path $pwd -Recurse -ErrorAction SilentlyContinue
+      If ($Results) {
+        $ResultString = $Results | Out-String
+        Write-Warning $ResultString
+        Add-AppveyorMessage -Message "PSScriptAnalyzer output contained one or more result(s) with 'Error' severity.`
+        Check the 'Tests' tab of this build for more details." -Category Error
+        Update-AppveyorTest -Name "PsScriptAnalyzer" -Outcome Failed -ErrorMessage $ResultString
+        Throw "Build failed. PsScriptAnalyzer found issues."
+      }
+      Else {
+        Update-AppveyorTest -Name "PsScriptAnalyzer" -Outcome Passed
+      }
