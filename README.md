@@ -67,12 +67,12 @@ vagrant plugin install vagrant-vmware-desktop
 Clone this repo or take just the `Vagrantfile`  
 VirtualBox Provider
 ```
-vagrant up RTOW-Vbox
+vagrant up RTOW-Vbox --provider=virtualbox
 ```
 
 VMware Provider
 ```
-vagrant up RTOW-Vmware
+vagrant up RTOW-Vmware --provider=vmware_workstation
 ```
 
 > [!CAUTION]
