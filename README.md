@@ -12,7 +12,7 @@ Based on this Project Overview : https://github.com/StefanScherer/packer-windows
 This project automates the setup of work environments for Red Team operators, enabling faster deployment and operational readiness.  
 At the root of the `C:` drive, you will find a comprehensive set of tools necessary for conducting Red Team missions while adhering to OPSEC best practices.  
 
-### Why :interrobang: <img src="./image/why.gif" align="right" width="270" height="170" />  
+### Why :interrobang: <img src="./image/why.gif" align="right" width="290" height="190" />  
 So why Windows? Well, it's not exactly out of enthusiasm. However, Visual Studio works well—really well, in fact—and it allows you to test loaders or payloads you might write. More importantly, it lets you have a minimal machine that closely resembles your engagement scope (client machine). I don't want to run two virtual machines—one Linux and one Windows—for everything. Needless to say, I won't necessarily use this machine for standard pentests.  
 
 
