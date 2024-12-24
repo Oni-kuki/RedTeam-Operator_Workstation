@@ -39,7 +39,7 @@ Vagrant.configure("2") do |config|
     config.windows.halt_timeout = 15
 
     # if you want to use RDP to connect to the VM you can use the following line
-    config.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
+    #config.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
 
     config.vm.provider :vmware_workstation do |v, override|
         v.gui = true
