@@ -1,7 +1,8 @@
 Vagrant.configure("2") do |config|
     config.vm.define "RTOW-Vbox" do |config|
     config.vm.box = "RedTeam-Operator_Workstation/RedTeamWkstn-virtualbox"
-    config.vm.box_version = "1"
+    config.vm.box_url = "https://api.cloud.hashicorp.com/vagrant-archivist/v1/object/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJSZWRUZWFtLU9wZXJhdG9yX1dvcmtzdGF0aW9uL1JlZFRlYW1Xa3N0bi12aXJ0dWFsYm94LzEvVmlydHVhbGJveC9jMWI2M2JiZS1jMWE3LTExZWYtOTRjMC03NmNhOTZiY2YzNTEiLCJtb2RlIjoiciIsImZpbGVuYW1lIjoiUmVkVGVhbVdrc3RuLXZpcnR1YWxib3hfMV92aXJ0dWFsYm94X2FtZDY0LmJveCJ9._L4xXa95qPtpNVhW0MAIQD11m3B3OQ8sS5x62_TreZA"
+   # config.vm.box_version = "1"
     config.vm.communicator = "winrm"
 
     # Admin user name and password
@@ -28,7 +29,8 @@ end
 Vagrant.configure("2") do |config|
     config.vm.define "RTOW-Vmware" do |config|
     config.vm.box = "RedTeam-Operator_Workstation/RedTeamWkstn-vmware"
-    config.vm.box_version = "1"
+    config.vm.box_url = "https://api.cloud.hashicorp.com/vagrant-archivist/v1/object/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJSZWRUZWFtLU9wZXJhdG9yX1dvcmtzdGF0aW9uL1JlZFRlYW1Xa3N0bi12bXdhcmUvMS9WTXdhcmUvMjBhYThjNzAtYzFhMC0xMWVmLThjYWYtNzZjYTk2YmNmMzUxIiwibW9kZSI6InIiLCJmaWxlbmFtZSI6IlJlZFRlYW1Xa3N0bi12bXdhcmVfMV92bXdhcmVfZGVza3RvcF9hbWQ2NC5ib3gifQ.UCrrBva9jDNYhK0Upm2pXzY0pzfkXQLG9YOkCuCghQU"
+   # config.vm.box_version = "1"
     config.vm.communicator = "winrm"
 
     # Admin user name and password
