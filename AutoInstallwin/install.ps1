@@ -105,20 +105,20 @@ function SetupAll {
         Write-Host "Installation de Chocolatey..."
         Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
     } else {
-        Write-Host "Chocolatey est déjà installé."
+        Write-Host "Chocolatey already installed."
     }
 
     if (-not (Test-Path -Path $toolsPath)) {
-        Write-Host "Création du dossier $toolsPath..."
+        Write-Host "Creation of folder $toolsPath..."
         New-Item -Path $toolsPath -ItemType Directory | Out-Null
     }
     
 
-    Write-Host "Ajout de $toolsPath aux exclusions de Windows Defender..."
+    Write-Host "adding $toolsPath in Windows Defender exclusion..."
     Add-MpPreference -ExclusionPath $toolsPath
     
 
-    Write-Host "Installation des outils avec Chocolatey..."
+    Write-Host "Tools installation with chocolatey..."
     choco install git.install -y # Git
     choco install spice-agent -y # if we use KVM
     choco install processhacker.install -y # Process Hacker
@@ -128,11 +128,11 @@ function SetupAll {
     $msbuildExe = "$matches[1]MSBuild.exe"
     
     if (-not (Test-Path $msbuildExe)) {
-        Write-Host "MSBuild introuvable via la base de registre. Vérification dans le dossier Visual Studio..."
+        Write-Host "MSBuild not found with in registry hive... Checking in Visual Studio Folder..."
         $msbuildExe = "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"
         
         if (-not (Test-Path $msbuildExe)) {
-            Write-Host "Impossible de trouver MSBuild. Assure-toi que Visual Studio est installé."
+            Write-Host "MSBuild not found in Visual studio folder, Visual studio are installed ??."
             #exit
         }
     }
@@ -141,7 +141,7 @@ function SetupAll {
     foreach ($repo in $gitRepoList) {
         $recursiveFlag = ""
         if ($repo -match "^--recursive\s") {
-            Write-Host "Clonage récursif détecté pour $repo"
+            Write-Host "recusive cloning $repo"
             $recursiveFlag = "--recursive"
             $repo = $repo -replace "^--recursive\s", ""
         }
@@ -152,14 +152,14 @@ function SetupAll {
     
 
         if (-not (Test-Path -Path $repoPath)) {
-            Write-Host "Création du dossier $repoPath pour le dépôt $repoName..."
+            Write-Host "Folder creadtion $repoPath for repo: $repoName..."
             New-Item -Path $repoPath -ItemType Directory | Out-Null
         }
     
         Push-Location "C:\Program Files\Git\cmd"
     
        # recursive clonning
-        Write-Host "Clonage du dépôt $repo dans $repoPath..."
+        Write-Host "repo cloning $repo in $repoPath..."
         & ./git.exe clone $recursiveFlag $repo $repoPath
     
         #come back to the previous location
