@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.provider :virtualbox do |v, override|
         #v.gui = true
-        v.customize ["modifyvm", :id, "--memory", 8192]
+        v.customize ["modifyvm", :id, "--memory", 4096]
         v.customize ["modifyvm", :id, "--cpus", 2]
         v.customize ["modifyvm", :id, "--vram", 128]
         v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
@@ -49,7 +49,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.provider :vmware_desktop do |v, override|
         v.gui = true
-        v.vmx["memsize"] = "2048"
+        v.vmx["memsize"] = "4096"
         v.vmx["numvcpus"] = "2"
         v.vmx["ethernet0.virtualDev"] = "vmxnet3"
         v.vmx["RemoteDisplay.vnc.enabled"] = "false"

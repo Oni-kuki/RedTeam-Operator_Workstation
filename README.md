@@ -27,19 +27,19 @@ Needless to say, I won't necessarily use this machine for standard pentests.
 - **Windows Subsystem for Linux (WSL)**  
   - Installed on both machines.  
   - Facilitates the use of Linux-based tools directly within Windows environments (to avoid having 40 machines for 2 systems).   
-  - compilers and tools are available in both windows and linux environments to interact with each other and facilitate obfuscation, evasion and tool configuration.
+  - Linux environments to interact with "Host" and facilitate obfuscation, evasion and tool configuration.
 
 ## Virtualization Notes  
-
-### VMware  
-- **Nested virtualization** is fully supported with **WSL 2**.
-- A Kali machine is pre-downloaded.   
-
-### VirtualBox  
+ 
 - **Nested virtualization** does not function reliably.  
 - WSL 1 is used as an alternative.  
 - Only the base Ubuntu machine is operational in this environment.  
-- Ubuntu is pre-installed, but some tools might not be available immediately. The provided script can assist in configuring and downloading necessary tools.  
+- Ubuntu is pre-installed, but some tools might not be available immediately.  
+- The provided script can assist in configuring and downloading necessary tools.  
+
+> [!NOTE] 
+> I provide the scripts for provisioning ubuntu here, it is possible that not everything can be installed. [ubuntu-provisioning](./AutoInstallwin/wsl.ps1)  
+> For vmware it is possible to enable nested virtualization and so you could install kali in WSL, if that's what you want I've provided a script to help you. [kali-provisioning](./AutoInstallwin/wsl2/wsl.ps1)  
 
 ## Packer  
 - If you want to create your own vagrant boxes using the Packers tool, you'll need to install packer and the plugins associated with the provider you want to use.  
@@ -60,19 +60,19 @@ packer build --only=vmware-iso .\windows_10.json
 ```
 > [!CAUTION]
 > I put 8gb of ram by default so, if you want more or less change the `attribut` memory at last of `windows_10.json`file.
-> it may take some time, you can grab coffe or tea while you wait  :coffee:
+> it may take some time, you can grab coffe or tea while you wait ≃ 1 hour  :coffee:
 
 ## launching  :rocket:  
 ### Vagrant  
 Most Interesting part for the easiest way to use.  
 Even if it seems to be easy, there are prerequisites for some providers.  
 For VMware you may need additional plugins for vagrant  
-https://developer.hashicorp.com/vagrant/install/vmware   
+[plugin](https://developer.hashicorp.com/vagrant/install/vmware)   
 ```
 vagrant plugin install vagrant-vmware-desktop
 ```
 > [!CAUTION]
-> I put 2gb of ram by default so, if you want more or less change the reference attributs in the `Vagrantfile` it's same thing for the cpus.  
+> I put 4gb of ram by default so, if you want more or less change the reference attributs in the `Vagrantfile` it's same thing for the cpus.  
 > it may take some time the first time because it's necessary to download the box once, you can grab coffe or tea while you wait  :coffee:
 
 > [!CAUTION]
@@ -83,16 +83,13 @@ vagrant plugin install vagrant-vmware-desktop
 Clone this repo or take just the `Vagrantfile`  
 VirtualBox Provider
 ```
-vagrant up RTOW-Vbox --provider=virtualbox
+vagrant up RTOW-Vbox
 ```
 
 VMware Provider
 ```
-vagrant up RTOW-Vmware --provider=vmware_desktop
-```
-> [!NOTE]
-> Normally if you have set everything up correctly you shouldn't even have to specify the provider  
-> But I prefer to specify  
+vagrant up RTOW-Vmware
+```  
 
 ## Future Improvements  
 - A future release will include full WSL configuration across both VMware and VirtualBox environments.
