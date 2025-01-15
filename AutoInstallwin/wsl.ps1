@@ -13,10 +13,10 @@ function dlwsl {
     wsl.exe --install -d Ubuntu
 }
 
-#function InstallWSL {    
+function InstallWSL {    
     # Clone a GitHub repository and run a script inside WSL
-    #wsl.exe -e sudo bash -c "sudo apt update && git clone https://github.com/Oni-kuki/RedTeam-Operator_Workstation && cd RedTeam-Operator_Workstation/AutoInstallwin && sudo bash ./wsl-kali-repo.sh && bash sh ./wsl-packages.sh"
-#}
+    wsl.exe -e sudo bash -c "sudo apt update && git clone https://github.com/Oni-kuki/RedTeam-Operator_Workstation && cd RedTeam-Operator_Workstation/AutoInstallwin && apt install dos2unix -y && dos2unix * && sudo bash ./wsl-kali-repo.sh && bash sh ./wsl-packages.sh"
+}
 
 dlwsl
-#InstallWSL
+InstallWSL

@@ -102,7 +102,7 @@ function SetupAll {
     
 
     if (-not (Get-Command choco -ErrorAction SilentlyContinue)) {
-        Write-Host "Installation de Chocolatey..."
+        Write-Host "Chocolatey Installation..."
         Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
     } else {
         Write-Host "Chocolatey already installed."
@@ -116,7 +116,6 @@ function SetupAll {
 
     Write-Host "adding $toolsPath in Windows Defender exclusion..."
     Add-MpPreference -ExclusionPath $toolsPath
-    
 
     Write-Host "Tools installation with chocolatey..."
     choco install git.install -y # Git
@@ -136,7 +135,10 @@ function SetupAll {
             #exit
         }
     }
-    
+    & "C:\Program Files (x86)\Microsoft Visual Studio\Installer\setup.exe" modify `
+    --installPath "C:\Program Files\Microsoft Visual Studio\2022\Community" `
+    --config "a:\.vsconfig" `
+    --passive --norestart
 
     foreach ($repo in $gitRepoList) {
         $recursiveFlag = ""
@@ -158,7 +160,7 @@ function SetupAll {
     
         Push-Location "C:\Program Files\Git\cmd"
     
-       # recursive clonning
+       # recursive cloning
         Write-Host "repo cloning $repo in $repoPath..."
         & ./git.exe clone $recursiveFlag $repo $repoPath
     
@@ -175,10 +177,71 @@ function SetupAll {
 #            Write-Host "Impossible de détecter le type de projet dans $repoName."
 #        }
     }
+    
+    Add-MpPreference -ExclusionPath "C:\Users\vagrant\source"
 }
+
+function download-sliver-client {
+    $sliverfolder = "C:\Users\vagrant\.sliver"
+    $sliverclientfolder = "C:\Users\vagrant\.sliver-client"
+    New-Item -Path $sliverfolder -ItemType Directory | Out-Null
+    New-Item -Path $sliverclientfolder -ItemType Directory | Out-Null
+    
+    $downloadFolder = "C:\Tools\Sliver"
+
+    New-Item -Path $downloadFolder -ItemType Directory | Out-Null
+
+
+    if (-not (Test-Path -Path $downloadFolder)) {
+        New-Item -ItemType Directory -Path $downloadFolder | Out-Null
+    }
+    
+    $artifacts = (Invoke-RestMethod -Uri "https://api.github.com/repos/BishopFox/sliver/releases/latest").assets.browser_download_url
+    
+    $sliverClient = "sliver-client_windows.exe"
+    
+    foreach ($url in $artifacts) {
+        if ($url -like "*$sliverClient*") {
+            Write-Host "Downloading $url"
+            $outputPath = Join-Path -Path $downloadFolder -ChildPath (Split-Path -Leaf $url)
+            Invoke-WebRequest -Uri $url -OutFile $outputPath -UseBasicParsing
+            Write-Host "File saved to $outputPath"
+        }
+    }
+Add-MpPreference -ExclusionPath $sliverfolder
+Add-MpPreference -ExclusionPath $sliverclientfolder 
+
+}
+
 SetupAll
+
+function timer{
+$duration = 180 # 3 minutes
+$startTime = Get-Date
+
+    while ($true) {
+        $elapsed = (Get-Date) - $startTime
+        $remaining = $duration - $elapsed.TotalSeconds
+
+        if ($remaining -le 0) {
+            Write-Host "Timer Ending !" -ForegroundColor Green
+            break
+        }
+
+        Clear-Host
+        Write-Host "Remaining time : $([math]::Floor($remaining)) secondes" -ForegroundColor Yellow
+        Start-Sleep -Seconds 1
+    }
+}
+
+timer
+Write-Host "Sliver downloading..."
+
+download-sliver-client
+Write-Host "Let's move on WSL..."
+
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v "EnableWSL" /t REG_SZ /d "powershell -noexit -ExecutionPolicy Bypass -File a:\WSL.PS1"
-Write-Host "Installation Tools ok on passe a wsl..."
+Write-Host "Installation Tools ok, now WSL..."
 
 function Enablingfeatures {
     # Enable the VirtualMachinePlatform feature and WSL

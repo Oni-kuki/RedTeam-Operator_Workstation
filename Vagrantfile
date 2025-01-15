@@ -1,10 +1,12 @@
 Vagrant.configure("2") do |config|
     config.vm.define "RTOW-Vbox" do |config|
     config.vm.box = "RedTeam-Operator_Workstation/RedTeamWkstn-virtualbox"
-    config.vm.box_url = "https://api.cloud.hashicorp.com/vagrant-archivist/v1/object/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJSZWRUZWFtLU9wZXJhdG9yX1dvcmtzdGF0aW9uL1JlZFRlYW1Xa3N0bi12aXJ0dWFsYm94LzEvVmlydHVhbGJveC9jMWI2M2JiZS1jMWE3LTExZWYtOTRjMC03NmNhOTZiY2YzNTEiLCJtb2RlIjoiciIsImZpbGVuYW1lIjoiUmVkVGVhbVdrc3RuLXZpcnR1YWxib3hfMV92aXJ0dWFsYm94X2FtZDY0LmJveCJ9._L4xXa95qPtpNVhW0MAIQD11m3B3OQ8sS5x62_TreZA"
-   # config.vm.box_version = "1"
+    #config.vm.box_url = "https://api.cloud.hashicorp.com/vagrant-archivist/v1/object/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJSZWRUZWFtLU9wZXJhdG9yX1dvcmtzdGF0aW9uL1JlZFRlYW1Xa3N0bi12aXJ0dWFsYm94LzEvdmlydHVhbGJveC82MmJhYjVkYi1kMzMyLTExZWYtYjMzYy0wMjg1MWU2NmU1NWUiLCJtb2RlIjoiciIsImZpbGVuYW1lIjoiUmVkVGVhbVdrc3RuLXZpcnR1YWxib3hfMV92aXJ0dWFsYm94X2FtZDY0LmJveCJ9.T7UZH8hZFz2hyBmWmU4t9cHx12RSMiN4CBgHvzTCWt0"
+    config.vm.box_download_checksum_type = "sha256"
+    config.vm.box_download_checksum = "A72DA2DA90473C51B16A7B5B99A003A553C381A0664054E960ED9728EC1FDBB0"
+    config.vm.box_version = "1"
     config.vm.communicator = "winrm"
-
+    
     # Admin user name and password
     config.winrm.username = "vagrant"
     config.winrm.password = "vagrant"
@@ -17,7 +19,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.provider :virtualbox do |v, override|
         #v.gui = true
-        v.customize ["modifyvm", :id, "--memory", 2048]
+        v.customize ["modifyvm", :id, "--memory", 8192]
         v.customize ["modifyvm", :id, "--cpus", 2]
         v.customize ["modifyvm", :id, "--vram", 128]
         v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
@@ -29,8 +31,10 @@ end
 Vagrant.configure("2") do |config|
     config.vm.define "RTOW-Vmware" do |config|
     config.vm.box = "RedTeam-Operator_Workstation/RedTeamWkstn-vmware"
-    config.vm.box_url = "https://api.cloud.hashicorp.com/vagrant-archivist/v1/object/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJSZWRUZWFtLU9wZXJhdG9yX1dvcmtzdGF0aW9uL1JlZFRlYW1Xa3N0bi12bXdhcmUvMS9WTXdhcmUvMjBhYThjNzAtYzFhMC0xMWVmLThjYWYtNzZjYTk2YmNmMzUxIiwibW9kZSI6InIiLCJmaWxlbmFtZSI6IlJlZFRlYW1Xa3N0bi12bXdhcmVfMV92bXdhcmVfZGVza3RvcF9hbWQ2NC5ib3gifQ.UCrrBva9jDNYhK0Upm2pXzY0pzfkXQLG9YOkCuCghQU"
-   # config.vm.box_version = "1"
+    #config.vm.box_url = "https://api.cloud.hashicorp.com/vagrant-archivist/v1/object/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXkiOiJSZWRUZWFtLU9wZXJhdG9yX1dvcmtzdGF0aW9uL1JlZFRlYW1Xa3N0bi12bXdhcmUvMS92bXdhcmVfZGVza3RvcC9lYTc1Y2U5OC1kMzMwLTExZWYtYjMzYy0wMjg1MWU2NmU1NWUiLCJtb2RlIjoiciIsImZpbGVuYW1lIjoiUmVkVGVhbVdrc3RuLXZtd2FyZV8xX3Ztd2FyZV9kZXNrdG9wX2FtZDY0LmJveCJ9.I6CFTAzusBel8YkB4MY2leryxKMsJfJ_DPt-BQ8sSj8"
+    config.vm.box_download_checksum_type = "sha256"
+    config.vm.box_download_checksum = "B8777D5720DA50DAAF0022A2293582F04D83A01183878BA0D5D45FBBB23531EC"
+    config.vm.box_version = "1"
     config.vm.communicator = "winrm"
 
     # Admin user name and password
