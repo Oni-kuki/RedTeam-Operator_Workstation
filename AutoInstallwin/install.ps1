@@ -14,6 +14,7 @@ function SetupAll {
     $toolsPath = "C:\Tools"
     $gitRepoList = @(
         "https://github.com/tevora-threat/SharpView",
+        "https://github.com/b4rtik/SharpKatz",
         "https://github.com/cube0x0/SharpSystemTriggers",
         "https://github.com/x64dbg/x64dbg",
         "https://github.com/forrest-orr/moneta",
