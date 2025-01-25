@@ -58,6 +58,7 @@ function SetupAll {
         "https://github.com/topotam/PetitPotam",
         "https://github.com/skahwah/SQLRecon",
         "https://github.com/GhostPack/Rubeus",
+        "https://github.com/thefLink/Hunt-Sleeping-Beacons",
         "https://github.com/matterpreter/OffensiveCSharp",
         "https://github.com/obfuscar/obfuscar",
         "https://github.com/ricardojoserf/NativeDump",
