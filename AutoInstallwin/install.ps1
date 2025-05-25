@@ -23,6 +23,7 @@ function SetupAll {
         "--recursive https://github.com/hasherezade/pe-sieve",
         "--recursive https://github.com/hasherezade/pe-bear",
         "--recursive https://github.com/hasherezade/exe_to_dll",
+        "--recursive https://github.com/hasherezade/pe_to_shellcode",
         "https://github.com/adrecon/AzureADRecon",
         "https://github.com/Mr-Un1k0d3r/AMSI-ETW-Patch",
         "https://github.com/V-i-x-x/AMSI-BYPASS",
