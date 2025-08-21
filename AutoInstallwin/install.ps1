@@ -12,6 +12,7 @@ else {
 
 function SetupAll {
     $toolsPath = "C:\Tools"
+    $payloadsPath = "C:\Payloads"
     $gitRepoList = @(
         "https://github.com/tevora-threat/SharpView",
         "https://github.com/b4rtik/SharpKatz",
@@ -116,10 +117,15 @@ function SetupAll {
         New-Item -Path $toolsPath -ItemType Directory | Out-Null
     }
     
+    if (-not (Test-Path -Path $payloadsPath)) {
+        Write-Host "Creation of folder $payloadsPath..."
+        New-Item -Path $payloadsPath -ItemType Directory | Out-Null
+    }
 
-    Write-Host "adding $toolsPath in Windows Defender exclusion..."
+    Write-Host "adding $toolsPath and $payloadsPath in Windows Defender exclusion..."
     Add-MpPreference -ExclusionPath $toolsPath
-
+    Add-MpPreference -ExclusionPath $payloadsPath
+    
     Write-Host "Tools installation with chocolatey..."
     choco install git.install -y # Git
     choco install spice-agent -y # if we use KVM
